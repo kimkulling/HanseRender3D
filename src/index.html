@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { display: block; }
-		</style>
-	</head>
-	<body>
-		<script src="js/three.js"></script>
-		<script>
-            const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+<head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="js/three.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-			const renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
 
-            {
-                const color = 0xFFFFFF;
-                const intensity = 1;
-                const light = new THREE.DirectionalLight(color, intensity);
-                light.position.set(-1, 2, 4);
-                scene.add(light);
-            }
-			const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
+        {
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(-1, 2, 4);
+            scene.add(light);
+        }
 
-			const cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
 
-			camera.position.z = 5;
+        const cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
 
-			const animate = function () {
-				requestAnimationFrame( animate );
+        camera.position.z = 5;
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+        const animate = function () {
+            requestAnimationFrame( animate );
 
-				renderer.render( scene, camera );
-			};
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            // use this to set your own matrix:
+            // Column-major version of the transformation
+            // var tempArrayCM = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 0, 0, 1];
+            // cube.matrix.set(tempArrayCM);
+            
+            renderer.render( scene, camera );
+        };
 
-			animate();		</script>
-	</body>
+        animate();		
+    </script>
+</body>
 </html>
